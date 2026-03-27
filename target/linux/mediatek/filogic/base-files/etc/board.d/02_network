@@ -62,6 +62,7 @@ mediatek_setup_interfaces()
 	livinet,zr-3020-ubootmod|\
 	netis,nx32u|\
 	qihoo,360t7|\
+	philips,hy3000|\
 	routerich,ax3000|\
 	routerich,ax3000-ubootmod|\
 	routerich,be7200|\
@@ -296,6 +297,11 @@ mediatek_setup_macs()
 	qihoo,360t7)
 		lan_mac=$(mtd_get_mac_ascii factory lanMac)
 		wan_mac=$(macaddr_add "$lan_mac" 1)
+		label_mac=$wan_mac
+		;;
+	philips,hy3000)
+		lan_mac=$(mmc_get_mac_binary factory 0x74)
+		wan_mac=$(macaddr factory $lan_mac 1)
 		label_mac=$wan_mac
 		;;
 	ruijie,rg-x60-pro)
