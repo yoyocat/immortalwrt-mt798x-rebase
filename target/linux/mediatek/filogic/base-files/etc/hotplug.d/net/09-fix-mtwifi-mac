@@ -58,6 +58,13 @@ mtwifi_set_macs()
 
         set_macs_to_dat "$b0_mac" "$b1_mac"
         ;;
+    philips,hy3000)
+        local base_mac="$(mmc_get_mac_binary factory 0x74)"
+        local b0_mac="$(macaddr_add $base_mac 2)"
+        local b1_mac="$(macaddr_add $base_mac 3)"
+
+        set_macs_to_dat "$b0_mac" "$b1_mac"
+        ;;
     qihoo,360t7)
         local base_mac="$(mtd_get_mac_ascii factory lanMac)"
         local b0_mac="$(macaddr_add $base_mac 2)"
